@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		const task1 = () => {
+			for(let i = 0; i <= 10; i++){
+				console.log(i);
+			}
+		}
+		// task1();
+		const task2 = () => {
+			let s = "";
+			for(let i = 10; i >= 0; i--){
+				s = s + i + " ";
+			}
+			console.log(s);
+		}
+		// task2();
+		const task3 = () => {
+			let s = prompt('enter 2 words:').split(' ');
+			let wordOne = s[0].length;
+			let wordTwo = s[1].length;
+			if(wordOne > wordTwo) {
+				console.log('first');
+			} 
+			else if(wordOne < wordTwo){
+				console.log('second')
+			} 
+			else{
+				console.log('equal length');
+			}
+
+			// console.log((s[0].length > s[1].length ? 'first' : 
+			// 	(s[0].length < s[1].length ? 'second' : 'equal length')))
+			
+			// console.log(s[0].length == s[1].length ? 'yes' : 'no');
+
+		}
+		// task3();
+		const task4 = () => {
+			let s = prompt('number:');
+			for (let i = 0; i < s.length; i++) {
+				console.log(s[i]);
+			}
+
+			// let n = parseInt(prompt('number:'));
+			// let temp = 0;
+			// while(n > 0){
+			// 	temp = n % 10;
+			// 	n = parseInt(n / 10);
+			// 	console.log(temp);
+			// }
+
+		}
+		// task4();
+		const task5 = () => {
+			let s = parseInt(prompt('number'));
+			for (let i = 1; i <= s; i = i*2) {
+				console.log(i);
+			}
+		}
+		// task5();
+		const task6 = () => {
+			let s = prompt('number').split(' ');
+			let sum = 0;
+			for(let i = 0; i < s.length; i++){
+				sum = sum + parseInt(s[i]);
+			}
+			console.log(sum);
+
+			// console.log(s.reduce((sum, arr) => { return sum + parseInt(arr);}, 0));
+		}
+		// task6();
+		const task7 = () => {
+			let arr = prompt('number1 number2 number3').split(' ');
+			let height = parseInt(arr[0]);
+			let speedUp = parseInt(arr[1]);
+			let fallDown = parseInt(arr[2]);
+			let currentHeight = height <= speedUp ? height + 1 : 0;
+			let days = height <= speedUp ? 1 : 0;
+			while(currentHeight < height && speedUp > fallDown){
+				if(currentHeight + speedUp >= height){
+					days = days + 1;
+					currentHeight = currentHeight + speedUp;
+				} else {
+					currentHeight = currentHeight + speedUp - fallDown;
+					days = days + 1;
+				}
+			}
+			console.log(days);
+		}
+		task7();
+		const task8 = () => {
+
+		}
+		task8();
+	</script>
+</head>
+<body>
+</body>
+</html>					
