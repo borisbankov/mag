@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.row > div{
+			margin: 8px;
+		}
+		.orange {
+			background: orange;
+		}
+		.yellow {
+			background: yellow;
+		}
+		.blue {
+			background: blue;
+		}
+		.gray {
+			background: gray;
+		}
+
+		@media screen and (min-width: 768px){
+			.row:last-child {
+				font-size: 0px;
+			}
+			.gray {
+				width:calc(50% - 16px);
+				font-size:16px;
+				display: inline-block;
+			}
+		}
+
+		@media screen and (min-width: 1024px){
+			.row{
+				font-size:0px;
+			}
+			.row > div {
+				display: inline-block;
+				font-size: 16px;
+			}
+			.orange {
+				width:calc(50% - 16px);
+			}
+			.yellow {
+				width:calc(100% - 16px);
+			}
+			.blue {
+				width:calc(33.3333333% - 16px);
+			}
+			.gray {
+				width:calc(25% - 16px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="row">
+		<div class="orange">1</div>
+		<div class="orange">2</div>
+	</div>
+	<div class="row">
+		<div class="yellow">3</div>
+	</div>
+	<div class="row">
+		<div class="blue">4</div>
+		<div class="blue">5</div>
+		<div class="blue">6</div>
+	</div>
+	<div class="row">
+		<div class="gray">7</div>
+		<div class="gray">8</div>
+		<div class="gray">9</div>
+		<div class="gray">10</div>
+	</div>
+</body>
+</html>

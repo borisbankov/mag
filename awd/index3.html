@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.yellow {
+			background: yellow;
+		}
+		.blue {
+			background: blue;
+		}
+		.red {
+			background: red;
+		}
+		.green {
+			background: green;
+		}
+
+		.row{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.row > div {
+			border:solid 1px white;
+			box-sizing: border-box;
+		}
+		@media screen and (min-width: 768px){
+			.one, .four, .five, .six{
+				flex: 0 0 25%;
+			}
+			.two, .three, .seven, .eight{
+				flex: 0 0 50%;
+			}
+		}
+
+		@media screen and (min-width: 992px){
+			.one, .two, .seven {
+				flex: 0 0 25%;
+			}
+			.four, .five {
+				flex: 0 0 50%;
+			}
+			.three, .eight{
+				flex:0 0 75%;
+			}
+			.six{
+				flex: 0 0 100%;
+			}
+		}
+
+		@media screen and (min-width: 1200px){
+			.eight {
+				flex: 0 0 25%;
+			}
+			.four, .five, .six{
+				flex: 0 0 33.3333333%;
+			}
+			.one, .two{
+				flex: 0 0 50%;
+			}
+			.seven{
+				flex: 0 0 75%;
+			}
+			.three{
+				flex: 0 0 100%;
+			}
+		}
+	</style>				
+</head>
+<body>
+	<div class="row">
+		<div class="blue one">1</div>
+		<div class="blue two">2</div>
+	</div>
+	<div class="row">
+		<div class="yellow three">3</div>
+	</div>
+	<div class="row">
+		<div class="green four">4</div>
+		<div class="green five">5</div>
+		<div class="green six ">6</div>
+	</div>
+	<div class="row">
+		<div class="red seven">7</div>
+		<div class="red eight">8</div>
+	</div>
+
+</body>
+</html>
