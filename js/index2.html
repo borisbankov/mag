@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            margin:12px 16px;
+            color:white;
+        }
+        .nav{
+            padding:10px;
+        }
+        .page{
+            background-color: cadetblue;
+            width: 420px;
+        }
+ 
+        .page-2 {
+            background:royalblue;
+            width: 600px;
+        }
+        ul{
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            vertical-align: top;
+            margin:10px 0px;
+            padding:0px;
+        }
+        ul>li{ 
+            width:25%;
+            margin:0 8px;
+        }
+        .nav a{
+            text-decoration: none;
+            color: crimson;
+            display: inline-block;
+            border: 5px solid black;
+            background-color: cornsilk;
+            padding: 5px;
+        }
+        a:hover {
+            background-color: crimson;
+            color: cornsilk;
+        }
+        .columns{
+           display: flex;
+           flex-direction: row;
+        }
+        .lcol, .rcol{
+            background-color: whitesmoke;
+            padding: 10px;
+            margin:0 8px;
+            width: 50%;
+        }
+        
+        .title{
+            margin: 12px 0px 12px 0px;
+            text-align: center;
+        }
+        .profile{
+            background-color: whitesmoke;
+            padding: 10px 90px 10px 10px;
+            display: inline-block;
+            margin: 20px 10px 20px 12px;
+        }
+        .p{
+            padding-bottom:12px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let zad1Array = document.querySelectorAll('a');
+            zad1Array.forEach(item => {
+                console.log(item.innerHTML);
+            });
+
+            let zad2Array = document.querySelectorAll('.title');
+            zad2Array.forEach(item => {
+                console.log(item.innerHTML);
+                console.log(item.innerText);
+            });
+
+            let zad3Array = document.querySelectorAll('p');
+            zad3Array.forEach(item => {
+                item.innerHTML = 'НОВ ПАРАГРАФ';
+            });
+
+            let zad4Array = document.querySelectorAll('img');
+            zad4Array.forEach(item => {
+                console.log(item?.src || 0); 
+            });
+
+            let zad5Array = document.querySelectorAll('img');
+            zad5Array.forEach(item => {
+                item.src = 'https://placebear.com/150/' + Math.floor(Math.random()*2 + 1) +  '00';
+            });
+
+            // let zad6Array = document.querySelectorAll('.columns > div');
+            // console.log([...zad6Array[0].children].map(c => c.className));
+            // for(let i = 0; i < zad6Array.length; i++){
+            //     for(let j = 0; j < zad6Array[i].children.length; j++){
+            //         console.log(zad6Array[i].children[j].className)
+            //     }
+            // }
+            // console.log(zad6Array[0].firstElementChild.className);
+            // console.log(zad6Array[0].firstElementChild.nextElementSibling.className);
+
+            let zad7Array = document.querySelectorAll('.title');
+            zad7Array.forEach(item => {
+                item.parentNode.style.backgroundColor = 'red';
+            });
+
+            // 8
+            document.querySelector('div.page').className = 'page-2';
+            // 9
+            document.querySelectorAll('img').forEach(item => { item.style.border = '4px solid white'; });
+
+            let imgOne = document.querySelectorAll('img')[0];
+            let imgTwo = document.querySelectorAll('img')[1];
+
+            imgOne.addEventListener('mouseenter', (e) => {
+                e.target.style.border = '5px solid yellow';
+            });
+
+            imgTwo.addEventListener('mouseenter', (e) => {
+                e.target.style.border = '15px solid orange';
+            });
+            // 11
+            let links = document.querySelectorAll('a');
+            links.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                     // document.body.style.background = 'rgb(' + Math.random()*256 + ', '  
+                     //                                        + Math.random()*256 + ', '  
+                     //                                        + Math.random()*256 + ')';
+
+                    document.body.style.background = '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0');
+                                                        
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="page">
+        <div class="nav">
+            <ul>
+                <li><a href="">Link 1</a></li>
+                <li><a href="">Link 2</a></li>
+                <li><a href="">Link 3</a></li>
+                <li><a href="">Link 4</a></li>
+                <li><a href="">Link 5</a></li>
+                <li><a href="">Link 6</a></li>
+                <li><a href="">Link 7</a></li>
+                <li><a href="">Link 8</a></li>
+                <li><a href="">Link 9</a></li>
+                <li><a href="">Link 10</a></li>
+            </ul>
+        </div>
+        <div class="columns">
+            <div class="lcol">
+                <div class="title">This is left column</div>
+                <div><img class="img" src="http://placehold.it/150x150" alt=""></div>
+            </div>
+            <div class="rcol">
+                <div class="title">This is right column</div>
+                <div><img class="img" src="http://placehold.it/150x150" alt=""></div>
+            </div>
+
+        </div>
+        <div class="p">
+            <div class="profile">
+                Вашето име, специаност, факултетен номер
+            </div>
+            <p>Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Minima aut error corporis magnam perferendis ratione, quibusdam vel rerum soluta, vero maiores accusantium optio, minus numquam sequi iusto repudiandae incidunt, ad! </p>
+            <p>Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Minima aut error corporis magnam perferendis ratione, quibusdam vel rerum soluta, vero maiores accusantium optio, minus numquam sequi iusto repudiandae incidunt, ad! </p>
+            <p>Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Minima aut error corporis magnam perferendis ratione, quibusdam vel rerum soluta, vero maiores accusantium optio, minus numquam sequi iusto repudiandae incidunt, ad! </p>
+            <p>Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Minima aut error corporis magnam perferendis ratione, quibusdam vel rerum soluta, vero maiores accusantium optio, minus numquam sequi iusto repudiandae incidunt, ad! </p>
+        </div>
+    </div>
+</body>
+</html>
