@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
         p{
             margin:12px 16px;
             color:white;
@@ -70,6 +71,9 @@
         .p{
             padding-bottom:12px;
         }
+        .active{
+            background-color: #777777;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -118,17 +122,17 @@
             document.querySelector('div.page').className = 'page-2';
             // 9
             document.querySelectorAll('img').forEach(item => { item.style.border = '4px solid white'; });
+            // 10
+            // let imgOne = document.querySelectorAll('img')[0];
+            // let imgTwo = document.querySelectorAll('img')[1];
 
-            let imgOne = document.querySelectorAll('img')[0];
-            let imgTwo = document.querySelectorAll('img')[1];
+            // imgOne.addEventListener('mouseenter', (e) => {
+            //     e.target.style.border = '5px solid yellow';
+            // });
 
-            imgOne.addEventListener('mouseenter', (e) => {
-                e.target.style.border = '5px solid yellow';
-            });
-
-            imgTwo.addEventListener('mouseenter', (e) => {
-                e.target.style.border = '15px solid orange';
-            });
+            // imgTwo.addEventListener('mouseenter', (e) => {
+            //     e.target.style.border = '15px solid orange';
+            // });
             // 11
             let links = document.querySelectorAll('a');
             links.forEach(item => {
@@ -143,6 +147,49 @@
                 });
             });
 
+            // 12
+
+            let colors = ['orange', 'blue', 'red', 'green', 'indigo', 'pink'];
+            let rnd = Math.floor(Math.random()*6);
+            console.log(rnd);
+            console.log(colors[rnd]);
+
+            // 13
+
+            document.querySelectorAll('img').forEach(item => {
+                item.addEventListener('mouseenter', (e) => {
+                    rnd = Math.floor(Math.random()*6);
+                    e.target.style.border = '5px solid ' + colors[rnd];
+                });
+            });
+
+            // 14
+            // let p = document.querySelectorAll('p');
+            // p[0].style.display = 'none';
+            // p[p.length-1].style.display = 'none';
+
+            // 15
+            // document.querySelectorAll('*').forEach(item => {
+            //     item.addEventListener('mouseenter', (e) => {
+            //         e.target.classList.add('active');
+            //     });
+            //     item.addEventListener('mouseleave', (e) => {
+            //         e.target.classList.remove('active');
+            //     });
+            // });
+
+            document.addEventListener('mouseover', (e) => {
+                    console.log(e);
+                    e.target.classList.add('active');
+            });
+            document.addEventListener('mouseout', (e) => {
+                    e.target.classList.remove('active');
+            });
+
+            let arrNumbers = [55, 200, 3.14, 40000, 1, 5, 9, 8];
+            document.querySelectorAll('p').forEach((item, i) => { 
+                item.innerHTML = item.innerHTML + ' ' + arrNumbers[i];
+            });
         });
     </script>
 </head>
@@ -155,11 +202,6 @@
                 <li><a href="">Link 3</a></li>
                 <li><a href="">Link 4</a></li>
                 <li><a href="">Link 5</a></li>
-                <li><a href="">Link 6</a></li>
-                <li><a href="">Link 7</a></li>
-                <li><a href="">Link 8</a></li>
-                <li><a href="">Link 9</a></li>
-                <li><a href="">Link 10</a></li>
             </ul>
         </div>
         <div class="columns">
