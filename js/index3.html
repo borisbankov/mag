@@ -180,6 +180,23 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     btn.classList.add('w3-button', 'w3-teal');
     btn.innerHTML = 'New Button';
     document.querySelector('.w3-twothird').append(btn);
+
+    btn.addEventListener('click', (e) => {
+      document.body.style = 'background-color: red!important';
+    });
+
+    // task1();
+
+    const task1 = (e) => {
+      e.target.style.fontSize = parseFloat(window.getComputedStyle(e.target).fontSize) + 5 + 'px';
+      // e.target.removeEventListener('mouseenter', task1);
+    }
+
+    let headings = document.querySelectorAll('h2');
+    headings.forEach(item => {
+      item.addEventListener('mouseenter', task1, { once: true });
+    });
+
   </script> 
 </body>
 </html>

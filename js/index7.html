@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event){
+
+            let left = document.querySelector('.left');
+            let right = document.querySelector('.right');
+            let chat = document.querySelector('.list-group');
+            let pole = document.querySelector('.form-control');
+            document.querySelector('.btn-success').addEventListener('click', (e) => {
+                let msg = pole.value;
+                let clone;
+                // if(chat.children.length % 2 == 0){
+                //     clone = left.cloneNode(true);
+                // } else {
+                //     clone = right.cloneNode(true);
+                // }
+
+                clone = chat.children.length % 2 == 0 ? left.cloneNode(true) : right.cloneNode(true); 
+                clone.innerText = msg;
+                chat.append(clone);
+                pole.value = '';
+            });
+        });
+    </script>
+</head>
+<body>
+ 
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+               <ul class="list-group">
+                    <li class="list-group-item list-group-item-info left my-2 ms-5 text-start rounded-3">Greetings</li>
+                    <li class="list-group-item list-group-item-primary right my-2 me-5 text-end rounded-3">Hello</li>
+                    <li class="list-group-item list-group-item-info left my-2 ms-5 text-start rounded-3">How can I help you?</li>
+                </ul>
+                <div>
+                    <div class="form-group ">
+                        <label>Съобщение</label>
+                        <input type="text" class="form-control" placeholder="въведете съобщение"/>
+                        <input type="button" class="form-control my-1 btn btn-success" value="изпрати"/>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+ 
+ 
+</body>
+</html>
