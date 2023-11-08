@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- създайте скрипт, чрез който при натискане на клавиши 
+                W (up) 
+    A (left)            D (right)
+                S (down)  
+    параграф #list се движи нагоре/наляво/надолу/надясно с по 10px при всяко отделно натискане на съответния клавиш -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (e) => {
+
+            let arr = [];
+
+
+            document.addEventListener('keydown', (e) => {
+                // console.log(e);
+                let p = document.querySelector('#list');
+                if(e.code == 'KeyW') {
+                    p.style.top = parseInt(window.getComputedStyle(p).top) - 10 + 'px';
+                } else if(e.code == 'KeyS'){
+                    p.style.top = parseInt(window.getComputedStyle(p).top) + 10 + 'px';
+                } else if(e.code == 'KeyA'){
+                     p.style.left = parseInt(window.getComputedStyle(p).left) - 10 + 'px';
+                } else if(e.code == 'KeyD'){
+                     p.style.left = parseInt(window.getComputedStyle(p).left) + 10 + 'px';
+                }
+
+                let startX = parseInt(p.style.left);
+                let endX = startX + parseInt(window.getComputedStyle(p).width); 
+                let startY = parseInt(p.style.top);
+                let endY = startY + parseInt(window.getComputedStyle(p).height);
+                    if(arr.length > 0){
+                        if(arr[0].x <= endX && startX <= arr[0].x + 30){
+                            if(arr[0].y <= endY && startY <= arr[0].y + 30){
+                                p.style.fontSize = parseInt(window.getComputedStyle(p).fontSize) + 8 + 'px';
+                                arr.pop();
+                                console.log(arr)
+                                document.querySelector('.cube').remove();
+                            }
+                        }
+                    }
+            });
+
+            document.querySelector('.bg-info').addEventListener('click', (e) => {
+                arr.push({x: e.x - 15, y: e.y - 15});
+                let cube = document.createElement('div');
+                cube.classList.add('cube');
+                e.target.append(cube);
+                cube.style.top = e.y - 15 + 'px';
+                cube.style.left = e.x - 15 + 'px';
+
+
+            });
+        });
+    </script>
+    <style>
+        body{ 
+            height:2000px;
+            transition: font-size 1s;
+        }
+        .cube{
+            position:absolute;;
+            top:0;
+            left:0;
+            background: gold;
+            width:30px;
+            height:30px;
+            display:inline-block;
+        }
+    </style>
+</head>
+<body class="bg-info ">
+    <div class="container">
+    <div style="position:absolute;top:0; left:0;" id="list">
+        <p> moooove </p>
+    </div>
+</div>
+
+</body>
+</html>

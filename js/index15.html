@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+ 
+    <!-- задача 1: да се създаде скрипт, чрез който при смяна на стойност от падащ списък се сменя и цвета на бутон, на база на избраната опция. Стойностите в опциите атрибут value са имена на класове, който ако се добавят към бутона се сменя неговия фон. Внимавайте, тъй като след добавяне на нов клас, е необходимо предния да бъде премахнат, за да не се поставят всички в даден момент и да спре промяната на фона на бутона -->
+ 
+    <!-- задача 2: да се създаде скрипт, чрез който при натискане върху бутон се сменя изображение http://placehold.co/150x150 на http://placehold.co/?x?, където ? e стойността въведена в текстовото поле Размер. Изберете наименования на id-тата на текстовата кутия, изображението и бутонът-->
+ 
+    <!-- задача 3: да се създаде скрипт, чрез който при натискане на бутон Голям, текстът в div panel-body  получава размер на шрифта 30px. Изберете наименования на id-тo на бутонa и текстовата кутия в body частта -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            
+            let zad1btn = document.querySelectorAll('.btn')[0];
+            document.querySelector('.custom-select').addEventListener('change', (e) => {
+                zad1btn.className = 'btn ' + e.target.value;
+            });      
+
+            document.querySelector('#btn').addEventListener('click', (e) => { 
+                let pole = document.querySelector('#pole').value;
+                document.querySelector('#img').src = 'https://placehold.co/' + pole;
+            }); 
+
+            // treta e lesna
+        });
+ 
+    </script>
+</head>
+<body>
+    <!-- задача 1 -->
+    <div class="container" style="margin-top:20px;margin-bottom:20px">
+        <div class="col-6">
+            <select name="" id="" class="custom-select">
+                <option value="">Изберете цвят</option>
+                <option value="btn-success">зелен</option>
+                <option value="btn-danger">червен</option>
+                <option value="btn-warning">оранжев</option>
+                <option value="btn-primary">син</option>
+                
+            </select>
+            <div class="container" style="margin-top:20px;margin-bottom:20px;">
+                <div class="form-group">
+                    <input type="button" class="btn" id="" value="Задача 1">
+ 
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+    <!-- задача 1 -->
+ 
+    <!-- задача 2 -->
+    <div class="container" style="margin-top:20px;margin-bottom:20px">
+        <form class="form-horizontal">
+ 
+            <div class="form-group">
+                <label for="size" class="col-lg-2 control-label">Размер</label>
+                <div class="col-6">
+                    <input type="text" class="form-control" id="pole" placeholder="размер">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="size" class="col-lg-2 control-label"> </label>
+                <div class="col-6 col-lg-offset-2">
+                    <button type="button" class="btn btn-primary" id="btn">Промени</button>
+                </div>
+            </div>
+            <div>
+                <img src="http://placehold.co/150x150" id="img"/>
+            </div>
+ 
+        </form>
+    </div>
+    <!-- задача 2 -->
+ 
+    <!-- задача 3 -->
+ 
+    <div class="container" style="margin-top:20px;margin-bottom:20px">
+        <div class="col-lg-6 col-md-6">
+            <div class="card bg-default ">
+                <div class="card-body" id="">
+                    <div class="card-title">Panel Heading</div>
+                        <div class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <input type="button" class="texts btn btn-primary " value="Голям" id="" >
+            </div>
+        </div>
+ 
+    </div>
+    <!-- задача 3 -->
+ 
+</body>
+</html>

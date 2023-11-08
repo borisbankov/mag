@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+ 
+    <!-- задача 1:  да се създаде скрипт, при който чрез натискане на десен бутон на мишката върху някой параграф, той получава червен цвят за фон -->
+    <!-- задача 2:  да се създаде скрипт, при който чрез използване на скролера на мишката се определя произволна на цвят рамка с дебелина от 3px-->
+    <!-- задача 3:  да се създаде скрипт, при който чрез въвеждане на текст в едноредово поле се отчита натискането на клавиш и се търси съвпадение в списък от елементи. При открито съответствие се оцветява само частта от въведеното. -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('.form-control').addEventListener('input', (e) => {
+                let redove = document.querySelectorAll('.list-group-item');
+                redove.forEach(item => {
+                    item.innerText = item.innerText;
+                    if(item.innerText.includes(e.target.value)){
+                        item.innerHTML = item.innerText.replace(e.target.value, 
+                            `<span style="background:red">${e.target.value}</span>`);
+                    }
+                    if(e.target.value == ''){
+                        item.innerText = item.innerText
+                    }
+
+                });
+            });
+
+        document.querySelectorAll('p').forEach(item => {
+            item.addEventListener('contextmenu', (e) => {
+                e.target.style.background = 'red';
+            });
+        });
+
+        document.querySelector('img').addEventListener('wheel', (e) => {
+            e.target.style.border = '3px solid red';
+        });
+
+
+        });
+ 
+    </script>
+</head>
+<body>
+    <!-- задача 1 -->
+    <div class="container my-4">
+        <p>lorem item 1</p>
+        <p>lorem item 2</p>
+        <p>lorem item 3</p>
+        <p>lorem item 4</p>
+        <p>lorem item 5</p>
+        <p>lorem item 6</p>
+        <p>lorem item 7</p>
+        <p>lorem item 8</p>
+        <p>lorem item 9</p>
+        <p>lorem item 10</p>
+    </div>
+    <!-- задача 1 -->
+ 
+    <!-- задача 2 -->
+    <div class="container my-4">
+        <img src="http://placehold.co/250x250" alt="">
+    </div>
+    <!-- задача 2 -->
+ 
+    <!-- задача 3 -->
+ 
+    <div class="container my-4">
+        <input type="text" class="form-control">
+        <ul class="list-group">
+            <li class="list-group-item"> Lorem ipsum</li>
+            <li class="list-group-item"> dolor sit</li>
+            <li class="list-group-item"> amet consectetur</li>
+            <li class="list-group-item"> adipisicing elit</li>
+            <li class="list-group-item"> Facere nemo</li>
+            <li class="list-group-item"> possimus in totam</li>
+            <li class="list-group-item"> eos harum rem</li>
+            <li class="list-group-item"> aliquam, eum recusandae quod</li>
+            <li class="list-group-item"> odit! Necessitatibus quibusdam</li>
+            <li class="list-group-item"> illum voluptatem nihil</li>
+        </ul>
+    </div>
+    <!-- задача 3 -->
+ 
+</body>
+</html>

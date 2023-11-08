@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- създайте скрипт, чрез който при избор на елемент или въвеждане на текст от левия формуляр, се дублира действието и в десния. -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let selects = document.querySelectorAll('.custom-select');
+            selects[0].addEventListener('change', (e) => {
+                selects[1].value = e.target.value;
+                // console.log(e.target.options[e.target.selectedIndex].innerText);
+
+            });
+
+            let inputs = document.querySelectorAll('.email-field');
+            inputs[0].addEventListener('input', (e) => {
+                inputs[1].value = e.target.value;
+                // console.log(e.target.value);
+                // console.log(e.data);
+            });
+
+            let checks = document.querySelectorAll('.subscribe-field');
+            checks[0].addEventListener('change', (e) => {
+                checks[1].checked = e.target.checked;
+            });
+
+            let boxes = document.querySelectorAll('textarea');
+            boxes[0].addEventListener('input', (e) => {
+                boxes[1].value = e.target.value;
+            });
+        });
+  </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row flex-row ">
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <select class="custom-select user-select">
+                        <option selected="">Избери потребител</option>
+                        <option value="1">Иван Иванов</option>
+                        <option value="2">Мария Петрова</option>
+                        <option value="3">Стефан Колев</option>
+                        <option value="4">Петя Илиева</option>
+                        <option value="5">Деница Филева</option>
+                        <option value="7">Красимир Жечев</option>
+                        <option value="8">Здравко Стоянов</option>
+                        <option value="10">Катерина Момчилова</option>
+                        <option value="11">Панчо Панчев</option>
+                        <option value="15">Елица Стоинева</option>
+                  </select>
+                </div>
+            <div class="form-group">
+                <label for="">Имейл</label>
+                <input type="text" class="form-control email-field">
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input subscribe-field" type="checkbox" value="">
+                    Абонирай ме!
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="">Напиши съобщение</label>
+                <textarea name="" id="" cols="20" rows="5" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="col-6 mt-3">
+            <div class="form-group">
+                <select class="custom-select user-select">
+                    <option selected="">Избери потребител</option>
+                    <option value="1">Иван Иванов</option>
+                    <option value="2">Мария Петрова</option>
+                    <option value="3">Стефан Колев</option>
+                    <option value="4">Петя Илиева</option>
+                    <option value="5">Деница Филева</option>
+                    <option value="7">Красимир Жечев</option>
+                    <option value="8">Здравко Стоянов</option>
+                    <option value="10">Катерина Момчилова</option>
+                    <option value="11">Панчо Панчев</option>
+                    <option value="15">Елица Стоинева</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Имейл</label>
+                <input type="text" class="form-control email-field">
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input subscribe-field" type="checkbox" value="">
+                    Абонирай ме!
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="">Напиши съобщение</label>
+                <textarea name="" id="" cols="20" rows="5" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
