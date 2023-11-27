@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        let canvas = document.getElementById('canvasId');
+        let context = canvas.getContext("2d");  
+        let mouse;
+    
+        let pAx, pAy, pBx, pBy, pCx, pCy, pDx, pDy;
+
+        canvas.addEventListener('click', (e) => {
+            pAx = e.offsetX;
+            pAy = e.offsetY;
+            context.strokeStyle = 'red';
+
+          
+
+            pCx = canvas.width - pAx;
+            pCy = canvas.height - pAy;
+
+            pBx = canvas.width - pAx;
+            pBy = pAy;
+
+            pDx = pAx;
+            pDy = canvas.height - pAy;
+
+            context.strokeStyle = 'red';
+            context.beginPath();
+            context.moveTo(pAx, pAy);
+            context.lineTo(pCx, pCy);
+            context.closePath();
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(pBx, pBy);
+            context.lineTo(pDx, pDy);
+            context.closePath();
+            context.stroke();
+
+            // reshenie s + 
+
+            // context.beginPath();
+            // context.moveTo(pAx - 100, pAy);
+            // context.lineTo(pAx + 100, pAy);
+            // context.closePath();
+            // context.stroke();
+
+            // context.beginPath();
+            // context.moveTo(pAx, pAy - 100);
+            // context.lineTo(pAx, pAy + 100);
+            // context.closePath();
+            // context.stroke();
+            // let lenX;
+            // if(e.offsetX <= 400){
+            //      lenX = e.offsetX;
+            // } else {
+            //      lenX = canvas.width - e.offsetX;
+            // }
+            // let lenY;
+          
+            // context.beginPath();
+            // context.moveTo(pAx - lenX, pAy);
+            // context.lineTo(pAx + lenX, pAy);
+            // context.closePath();
+            // context.stroke();
+
+
+            // context.beginPath();
+            // context.moveTo(pAx, pAy - lenX);
+            // context.lineTo(pAx, pAy + lenX);
+            // context.closePath();
+            // context.stroke();
+        });
+    });
+ 
+    const mousePlayer1 = (e) => {
+      return {
+        x: e.layerX,
+        y: e.layerY,
+      }
+    }
+</script>
+<style>
+    canvas{
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+  <canvas width="800" height="800" id="canvasId"></canvas>
+</body>
+</html>

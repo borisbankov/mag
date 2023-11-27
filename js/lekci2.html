@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', (e) => {
+            let canvas = document.querySelector('canvas');
+            let ctx = canvas.getContext('2d');
+            let strokeColorA = 'blue';
+            let strokeColorb = 'gold';
+            let lineA;
+            let lineB;
+            // ctx.strokeStyle = 'black';
+            ctx.lineWidth = 5;
+            ctx.lineJoin = "round";
+            document.addEventListener('keydown', (e) => {
+                if(e.key == 1){
+                    ctx.strokeStyle = 'blue';
+                }
+                if(e.key == 2){
+                    ctx.strokeStyle = 'gold';
+                }
+            })
+            let task1 = (e) => {
+                lineA.lineTo(e.offsetX, e.offsetY);
+                lineB.lineTo(e.offsetX+5, e.offsetY+5);
+                ctx.strokeStyle = 'blue';
+                ctx.stroke(lineA);
+                ctx.strokeStyle = 'gold';
+                ctx.stroke(lineB);
+            }
+            canvas.addEventListener('mousedown', (e) => {
+                lineA = new Path2D();
+                lineB = new Path2D();
+                ctx.beginPath();
+                lineA.moveTo(e.offsetX, e.offsetY);
+                lineB.moveTo(e.offsetX+5, e.offsetY+5);
+                canvas.addEventListener('mousemove', task1);
+               
+            });
+            
+            canvas.addEventListener('mouseup', (e) => {    
+                canvas.removeEventListener('mousemove', task1);
+                ctx.closePath();
+            });
+        });
+        
+    </script>
+    <style>
+        canvas{
+            border:solid 2px black;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1000" height="1000"></canvas>
+</body>
+</html>
