@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -11,38 +12,93 @@
             let context = canvas.getContext("2d");
             let mouse;
  
-            let x, y, w, h;
-            x = document.querySelector('#posX');
-            y = document.querySelector('#posY');
-            w = document.querySelector('#sizeX');
-            h = document.querySelector('#sizeY');
-            let rectangle = new Path2D();
-            
-            document.querySelector('.btn-info').addEventListener('click', (e) => {
-                let color = 'blue';
-                rectangle.rect(x.value, y.value, w.value, h.value);
-                context.fillStyle = color;
-                context.fill(rectangle);
-              });
+            let shapes = [];
+            let activeShape = null;
+            let drawShape = document.querySelector('#drawShape');
+            let xInput = document.querySelector('#posX');
+            let yInput = document.querySelector('#posY');
+            let wInput = document.querySelector('#sizeX');
+            let hInput = document.querySelector('#sizeY');
 
-            canvas.addEventListener("click", (e) => {
-                mouse = mousePlayer1(e);
-                if(context.isPointInPath(rectangle, mouse.x, mouse.y)){
-                  context.fillStyle = 'blue';
-                  context.clearRect(0, 0, canvas.width, canvas.height);
-                  context.rect(mouse.x - 200/2, mouse.y - 20/2, 200, 20);
-                  context.fill();
+            let draw = () => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                for(let i = 0; i < shapes.length; i++){
+                    context.fillStyle = shapes[i].color;
+                    context.beginPath();
+                    if(shapes[i].type == 'Rect'){
+                        context.rect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
+                    } else if(shapes[i].type == 'Circle'){
+                        context.arc(shapes[i].x, shapes[i].y, shapes[i].w/2, 0, Math.PI*2);
+                    }
+                    context.closePath();
+                    context.fill();
                 }
-            });
+            }
+            let move = (e) => {
 
+                // context.clearRect(0, 0, canvas.width, canvas.height);
+                for(let i = 0; i < shapes.length; i++){
+                    if(activeShape == shapes[i]){
+                        if(shapes[i].type == 'Rect'){
+                            shapes[i].x = e.offsetX - shapes[i].w/2;
+                            shapes[i].y = e.offsetY - shapes[i].h/2;
+                        } else if(shapes[i].type == 'Circle'){
+                            shapes[i].x = e.offsetX;
+                            shapes[i].y = e.offsetY;
+                        }
+                        
+                    }
+                    // context.fillStyle = shapes[i].color;
+                    // context.beginPath();
+                    // context.rect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
+                    // context.closePath();
+                    // context.fill();
+                }
+                draw();
+            }
+            drawShape.addEventListener('click', (e) => {
+                let shapeType = document.querySelector('[name=shape]:checked').value;
+                console.log(shapeType);
+
+                shapes.push({
+                    x: xInput.value, 
+                    y: yInput.value, 
+                    w: wInput.value, 
+                    h: hInput.value,
+                    color: '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0'),
+                    type: shapeType
+                });
+                draw();
+            });
+            
+            canvas.addEventListener('click', (e) => {
+                if(activeShape == null){
+                    for(let i = 0; i < shapes.length; i++){
+                        
+                        context.beginPath();
+                        if(shapes[i].type == 'Rect'){
+                            context.rect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
+                        } else if(shapes[i].type == 'Circle'){
+                            context.arc(shapes[i].x, shapes[i].y, shapes[i].w/2, 0, Math.PI*2);
+                        }
+                        context.closePath();
+                        if(context.isPointInPath(e.offsetX, e.offsetY)){
+                            console.log('yes');
+                            let newShape = shapes.splice(i, 1)[0];
+                            shapes.push(newShape);
+                            activeShape = shapes[shapes.length - 1];
+                            canvas.addEventListener('mousemove', move);
+                        }
+                    }
+                }
+
+                else {
+                    canvas.removeEventListener('mousemove', move);
+                    activeShape = null;
+                }
+
+            });
         });
- 
-        const mousePlayer1 = (e) => {
-          return {
-            x: e.offsetX,
-            y: e.offsetY,
-          }
-        }
  
         </script>
     <style type="text/css">
