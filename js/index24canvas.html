@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+ 
+        document.addEventListener('DOMContentLoaded', function(){
+            const canvas = document.getElementById("canvasId");
+            const context = canvas.getContext("2d");
+ 
+            const player = {x: 0, y: 0, width: 0, height: 0, oldX: 0};
+
+            player.width = 100;
+            player.height = 20;
+            player.x = 0;
+            player.y = canvas.height - player.height;
+
+            let draw = () => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.beginPath();
+                context.rect(player.x, player.y, player.width, player.height);
+                context.closePath();
+                context.fillStyle = 'white';
+                context.fill();
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                player.x = e.offsetX - player.width/2;
+                draw();
+            });
+        });
+            
+    </script>
+    <style>
+        #canvasId{
+            background:black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvasId" width="800" height="600"></canvas>
+</body>
+</html>
