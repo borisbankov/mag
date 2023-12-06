@@ -12,12 +12,12 @@
             // const img = new Image(); // Create new img element
             // img.src = "doge.png"; // Set source path
 
-            let ball = {x: 0, y: 0, r: 0, speedX: 0, speedY: 0}
-            ball.x = 100;
-            ball.y = 20;
+            let ball = {x: canvas.width*2, y: canvas.height*2, r: 0, speedX: 0, speedY: 0, activeState: 0}
+            // ball.x = 100;
+            // ball.y = 20;
             ball.r = 20;
-            ball.speedX = 8;
-            ball.speedY = 12;
+            // ball.speedX = 8;
+            // ball.speedY = 12;
 
             const player = {x: 0, y: 0, width: 0, height: 0, oldX: 0};
 
@@ -92,6 +92,10 @@
 
             canvas.addEventListener('mousemove', (e) => {
                 player.x = e.offsetX - player.width/2;
+                if(ball.activeState == 0){
+                    ball.x = e.offsetX;
+                    ball.y = player.y - ball.r;
+                }
             });
 
             const b = setInterval(draw, 24);
