@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Rotation</title>
+  <style>
+    canvas{
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="400" ></canvas>
+ 
+  <script>
+ 
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext("2d");
+ 
+ 
+    let rotateRectangle = (x, y, width, height, angle) => {
+      let radians = angle * (Math.PI / 180);
+      let centerX = x + width / 2;
+      let centerY = y + height / 2;
+ 
+      let newX1 = Math.cos(radians) * (x - centerX) - Math.sin(radians) * (y - centerY) + centerX;
+      let newY1 = Math.sin(radians) * (x - centerX) + Math.cos(radians) * (y - centerY) + centerY;
+ 
+      let newX2 = Math.cos(radians) * (x + width - centerX) - Math.sin(radians) * (y - centerY) + centerX;
+      let newY2 = Math.sin(radians) * (x + width - centerX) + Math.cos(radians) * (y - centerY) + centerY;
+ 
+      let newX3 = Math.cos(radians) * (x + width - centerX) - Math.sin(radians) * (y + height - centerY) + centerX;
+      let newY3 = Math.sin(radians) * (x + width - centerX) + Math.cos(radians) * (y + height - centerY) + centerY;
+ 
+      let newX4 = Math.cos(radians) * (x - centerX) - Math.sin(radians) * (y + height - centerY) + centerX;
+      let newY4 = Math.sin(radians) * (x - centerX) + Math.cos(radians) * (y + height - centerY) + centerY;
+ 
+      return { newX1, newY1, newX2, newY2, newX3, newY3, newX4, newY4 };
+    }
+ 
+    ctx.fillStyle = "blue";
+    ctx.fillRect(100, 100, 100, 20);
+ 
+    let originalX = 100;
+    let originalY = 100;
+    let originalWidth = 100;
+    let originalHeight = 20;
+    let rotationAngle = 30;
+ 
+    let rotatedPositions = rotateRectangle(originalX, originalY, originalWidth, originalHeight, rotationAngle);
+ 
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.moveTo(rotatedPositions.newX1, rotatedPositions.newY1);
+    ctx.lineTo(rotatedPositions.newX2, rotatedPositions.newY2);
+    ctx.lineTo(rotatedPositions.newX3, rotatedPositions.newY3);
+    ctx.lineTo(rotatedPositions.newX4, rotatedPositions.newY4);
+    ctx.closePath();
+    ctx.fill();
+ 
+  
+  </script>
+</body>
+</html>

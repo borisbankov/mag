@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        let canvas = document.getElementById('canvasId');
+        let context = canvas.getContext("2d");  
+        let mouse;
+        let cubes = [];
+        let activeColor = 'red';
+        context.lineWidth = 5;
+      
+
+        let draw = (e) => {
+            context.lineTo(e.offsetX+1, e.offsetY+1);
+            context.stroke();
+        }
+        canvas.addEventListener('click', (e) => {
+
+            for (let i = 0; i < cubes.length; i++) {
+                let shape = new Path2D();
+                context.beginPath();
+                shape.rect(cubes[i].x, cubes[i].y, cubes[i].width, cubes[i].height);
+                context.closePath();
+                if(context.isPointInPath(shape, e.offsetX, e.offsetY)){
+                    activeColor = cubes[i].color;
+                }
+            }
+
+            context.strokeStyle = activeColor;
+            context.beginPath();
+            context.moveTo(e.offsetX, e.offsetY);
+            context.lineTo(e.offsetX+1, e.offsetY+1);
+            context.closePath();
+            context.stroke();
+        });
+
+        canvas.addEventListener('mousedown', (e) => {
+            context.strokeStyle = activeColor;
+            context.beginPath();
+            context.moveTo(e.offsetX, e.offsetY);
+            canvas.addEventListener('mousemove', draw);
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+            canvas.removeEventListener('mousemove', draw);
+            context.closePath();
+        });
+
+
+        for (let i = 1; i <= 5; i++) {
+            let newCube = new ColorCube(canvas.width - 50*i - 10*i, canvas.height - 50, 50, 50);
+            context.beginPath();
+            context.fillStyle = newCube.color;
+            context.rect(newCube.x, newCube.y, newCube.width, newCube.height);
+            context.fill();
+            context.closePath();
+            cubes.push(newCube);
+        }
+        console.log(cubes);
+        
+    });
+ 
+    const mousePlayer1 = (e) => {
+      return {
+        x: e.layerX,
+        y: e.layerY,
+      }
+    }
+ 
+    const colorPicker = () => {
+        let color = '#';
+        let hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        for (let i = 0; i < 6; i++) {
+            color = color + hex[Math.floor(Math.random()*16)];
+        }
+ 
+        return color;
+    }
+    class ColorCube{
+        constructor(x, y, width, height){
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.color = colorPicker();
+        }
+    }
+    
+</script>
+<style>
+    canvas{
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+  <canvas width="800" height="800" id="canvasId"></canvas>
+</body>
+</html>

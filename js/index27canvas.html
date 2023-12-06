@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Rotation</title>
+  <style>
+    canvas{
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="400" ></canvas>
+ 
+  <script>
+ 
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext("2d");
+ 
+ 
+    let drawRotatedRect = (x, y, width, height, rotation) => {
+      ctx.save(); 
+      ctx.translate(x + width / 2, y + height / 2);
+      ctx.rotate(rotation * Math.PI / 180);
+      ctx.fillRect(-width / 2, -height / 2, width, height);
+      ctx.restore();
+    }
+    ctx.fillStyle = "blue";
+    ctx.fillRect(100, 100, 100, 20);
+ 
+    ctx.fillStyle = "red";
+    drawRotatedRect(100, 100, 100, 20, 30);
+ 
+  </script>
+</body>
+</html>

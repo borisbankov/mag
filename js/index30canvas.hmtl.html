@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Tetris Block</title>
+  <style>
+    canvas {
+     background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="400" height="1400"></canvas>
+ 
+  <script>
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+ 
+    let block = {
+      x: 100,
+      y: 50,
+      width: 30,
+      height: 30,
+      angle: 0,
+      rotationSpeed: 5,
+      fallSpeed: 5
+    };
+ 
+    function drawBlock() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'blue';
+      ctx.save();
+      ctx.translate(block.x + block.width + block.width/2, block.y);
+      ctx.rotate(block.angle * Math.PI/180);
+
+      ctx.fillRect(block.x - block.width + block.width/2, block.y - block.height, block.width, block.height);
+      ctx.fillRect(block.x - block.width + block.width/2 + block.width, block.y - block.height, block.width, block.height);
+      ctx.fillRect(block.x - block.width + block.width/2 + block.width, block.y - block.height - block.height, block.width, block.height);
+      ctx.fillRect(block.x - block.width + block.width/2 + block.width*2, block.y -block.height, block.width, block.height);
+      ctx.restore();
+      block.y = block.y + block.fallSpeed;
+
+      // block.angle = block.angle + block.rotationSpeed;
+      // ctx.save();
+      // ctx.translate(block.x + block.width/2, block.y + block.height/2);
+      // ctx.rotate(block.angle * Math.PI/180);
+
+      // ctx.fillRect(-block.width/2, -block.height/2, block.width, block.height);
+      // ctx.restore();
+      // block.y = block.y + block.fallSpeed;
+      // block.angle = block.angle + block.rotationSpeed;
+
+      requestAnimationFrame(drawBlock);
+    }
+ 
+    setInterval(() => {
+      // drawBlock();
+    }, 41);
+ 
+    drawBlock();
+  </script>
+</body>
+</html>

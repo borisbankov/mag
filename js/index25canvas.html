@@ -31,7 +31,8 @@
                 shapes.push({
                     x: 90*i + 10*i, y: 0, width: 90, height: 20, 
                     color: '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0'),
-                    active: true
+                    active: true,
+                    solid: Math.floor(Math.random()*4) == 3 ? true : false
                 })
             }
 
@@ -45,14 +46,19 @@
                 ball.x = ball.x + ball.speedX;
                 ball.y = ball.y + ball.speedY;
                 if(ball.speedY > 0){
-                    if(ball.y >= canvas.height - player.height/2){
-                        if((ball.x + ball.r >= player.x && ball.x + ball.r <= player.x + player.width) || 
-                            (ball.x - ball.r >= player.x && ball.x - ball.r <= player.x + player.width)){
+                    if(ball.y >= canvas.height - player.height - ball.r/2){
+                        if((ball.x + ball.r >= player.x - 5 && ball.x + ball.r <= player.x + player.width - 5) || 
+                            (ball.x - ball.r >= player.x + 5 && ball.x - ball.r <= player.x + player.width + 5)){
                             ball.speedY = -ball.speedY;
+                            if(ball.speedX > 0 && player.oldX > player.x){
+                                ball.speedX = -ball.speedX;
+                            } else if(ball.speedX < 0 && player.oldX < player.x){
+                                ball.speedX = -ball.speedX;
+                            }
+
                         } else {
                             clearInterval(b);
                         }
-                        
                     }
                 }
                 if(ball.x >= canvas.width){
@@ -62,7 +68,12 @@
                     for (var i = 0; i < shapes.length; i++) {
                         if((ball.x + ball.r >= shapes[i].x && ball.x + ball.r <= shapes[i].x + shapes[i].width) || 
                             (ball.x - ball.r >= shapes[i].x && ball.x - ball.r <= shapes[i].x + shapes[i].width)){
-                            shapes[i].active = false;
+                            if(shapes[i].solid == true) {
+                                shapes[i].color = 'gray';
+                                shapes[i].solid = false;
+                            } else {
+                                shapes[i].active = false;
+                            }
                         }
                     }
                     ball.speedY = -ball.speedY;
@@ -87,6 +98,7 @@
                 context.closePath();
                 context.fill();
                 // context.drawImage(img, player.x - 113/2, player.y);
+                player.oldX = player.x;
             }
             // draw();
 
@@ -95,6 +107,14 @@
                 if(ball.activeState == 0){
                     ball.x = e.offsetX;
                     ball.y = player.y - ball.r;
+                }
+            });
+
+            canvas.addEventListener('click', (e) => {
+                if(ball.activeState == 0){
+                    ball.speedX = Math.floor(Math.random()*2) % 2 == 0 ? -8 : 8;
+                    ball.speedY = -6;
+                    ball.activeState = 1;
                 }
             });
 
