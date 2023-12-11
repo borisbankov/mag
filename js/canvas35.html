@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Rotation</title>
+  <style>
+    canvas{
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="800" height="800"></canvas>
+  <script>
+ 
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext("2d");
+   
+    let shape1 = {x: 20, y: 30, w: 50, h: 50, speedX: 5, speedY: 8};
+    let shape2 = {x: 420, y: 450, w: 50, h: 50, speedX: 6, speedY: 7};
+
+    let draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      shape1.x = shape1.x + shape1.speedX;
+      shape1.y = shape1.y + shape1.speedY;
+        if(shape2 != null) {shape2.x = shape2.x + shape2.speedX;}
+        if(shape2 != null) {shape2.y = shape2.y + shape2.speedY;}
+        if(shape1.x >=canvas.width - shape1.w || shape1.x <= 0){
+          shape1.speedX = -shape1.speedX;
+        }
+      if(shape1.y >= canvas.height - shape1.h || shape1.y <= 0){
+                shape1.speedY = -shape1.speedY;
+      }
+      if(shape2 != null){
+        
+
+        if(shape2.x >= canvas.width - shape2.w || shape2.x <= 0){
+          shape2.speedX = -shape2.speedX;
+        }
+
+        
+        if(shape2.y >= canvas.height - shape2.h || shape2.y <= 0){
+          shape2.speedY = -shape2.speedY;
+        }
+
+        if(
+          ((shape1.x >= shape2.x && shape1.x <= shape2.x + shape2.w) || 
+          (shape2.x >= shape1.x && shape2.x <= shape1.x + shape2.w)) &&
+          ((shape1.y >= shape2.y && shape1.y <= shape2.y + shape2.h) || 
+          (shape2.y >= shape1.y && shape2.y <= shape1.y + shape2.h))) {
+
+          shape1.w = shape1.w + shape2.w;
+          shape1.h = shape1.h + shape2.h;
+
+          shape2 = null;
+        } 
+      }
+      ctx.fillRect(shape1.x, shape1.y, shape1.w, shape1.h);
+      if(shape2 != null){ ctx.fillRect(shape2.x, shape2.y, shape2.w, shape2.h); }
+      
+      requestAnimationFrame(draw);
+    }
+    draw();
+ 
+  </script>
+</body>
+</html>

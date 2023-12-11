@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Rotation</title>
+  <style>
+    canvas{
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="400"></canvas>
+  <script>
+ 
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext("2d");
+    let x = 20, y = 20;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    document.addEventListener('keydown', (e) => {
+      if(e.code == 'KeyW') {
+        y = y - 10;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+      if(e.code == 'KeyA') {
+        x = x - 10;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+      if(e.code == 'KeyD') {
+        x = x + 10;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+      if(e.code == 'KeyS') {
+        y = y + 10;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+    });
+ 
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        let canvas = document.getElementById('canvasId');
+        let ctx = canvas.getContext("2d");  
+        let x = 400, y = 50;
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+
+        for (var i = 0; i < 5; i++) {
+          x = x + 50;
+          y = y + 50;
+          ctx.fillStyle = 'white';
+          ctx.beginPath();
+          ctx.arc(x, y, 20, 0, Math.PI*2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        for (var i = 0; i < 5; i++) {
+          x = x - 50;
+          y = y + 50;
+          ctx.fillStyle = 'white';
+          ctx.beginPath();
+          ctx.arc(x, y, 20, 0, Math.PI*2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        for (var i = 0; i < 5; i++) {
+          x = x - 50;
+          y = y - 50;
+          ctx.fillStyle = 'white';
+          ctx.beginPath();
+          ctx.arc(x, y, 20, 0, Math.PI*2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        for (var i = 0; i < 4; i++) {
+          x = x + 50;
+          y = y - 50;
+          ctx.fillStyle = 'white';
+          ctx.beginPath();
+          ctx.arc(x, y, 20, 0, Math.PI*2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        
+    });
+ 
+</script>
+<style>
+    canvas{
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+  <canvas width="800" height="800" id="canvasId"></canvas>
+</body>
+</html>

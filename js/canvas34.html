@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () =>{
+            let canvas = document.getElementById('canvasId');
+            let context = canvas.getContext("2d");  
+
+            fetch('https://corsproxy.io/?http://deepcloud.eu/logo.json')
+            .then(r => r.json())
+            .then(items => {
+                // console.log(items);
+                for(let i = 0; i < items.length; i++){
+                    context.beginPath();
+                    context.arc(items[i].x, items[i].y, 1, 0, Math.PI*2);
+                    context.closePath();
+                    context.fill();
+                }
+            });
+        });
+ 
+        const mousePlayer1 = (e) => {
+            return {
+                x: e.layerX,
+                y: e.layerY,
+            }
+        }
+    </script>
+    <style>
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="800" id="canvasId"></canvas>
+</body>
+</html>

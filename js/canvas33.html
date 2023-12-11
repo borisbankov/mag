@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () =>{
+            let canvas = document.getElementById('canvasId');
+            let context = canvas.getContext("2d");  
+
+            // let randomShape = () => {
+            //     let r = Math.floor(Math.random()*(100 - 50 + 1) + 50);
+            //     // Math.floor(Math.random()*(max - min + 1) + min)
+            //     let color = 'rgb(' + Math.floor(Math.random()*(255 - 50 + 1) + 50) + ', ' +
+            //                          Math.floor(Math.random()*(255 - 50 + 1) + 50) + ', ' +
+            //                          Math.floor(Math.random()*(255 - 50 + 1) + 50) + ')'; 
+            //     return { 
+            //         r: r, 
+            //         color: color 
+            //     }
+            //                          // rgb(255, 30, 255)
+            // }
+
+            canvas.addEventListener('click', (e) => {
+                let r = Math.floor(Math.random()*(100 - 50 + 1) + 50);
+               
+                let color = 'rgb(' + Math.floor(Math.random()*(255 - 50 + 1) + 50) + ', ' +
+                                     Math.floor(Math.random()*(255 - 50 + 1) + 50) + ', ' +
+                                     Math.floor(Math.random()*(255 - 50 + 1) + 50) + ')'; 
+                context.beginPath();
+                context.arc(e.offsetX, e.offsetY,r, 0, Math.PI*2);
+                context.closePath();
+                context.fillStyle = color;
+                context.fill();
+            });
+        });
+ 
+        const mousePlayer1 = (e) => {
+            return {
+                x: e.layerX,
+                y: e.layerY,
+            }
+        }
+    </script>
+    <style>
+        canvas{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="800" id="canvasId"></canvas>
+</body>
+</html>

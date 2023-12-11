@@ -23,7 +23,7 @@
       width: 30,
       height: 30,
       angle: 0,
-      rotationSpeed: 5,
+      rotationSpeed: 90,
       fallSpeed: 5
     };
  
@@ -34,14 +34,14 @@
       ctx.translate(block.x + block.width + block.width/2, block.y);
       ctx.rotate(block.angle * Math.PI/180);
 
-      ctx.fillRect(block.x - block.width + block.width/2, block.y - block.height, block.width, block.height);
-      ctx.fillRect(block.x - block.width + block.width/2 + block.width, block.y - block.height, block.width, block.height);
-      ctx.fillRect(block.x - block.width + block.width/2 + block.width, block.y - block.height - block.height, block.width, block.height);
-      ctx.fillRect(block.x - block.width + block.width/2 + block.width*2, block.y -block.height, block.width, block.height);
+      ctx.fillRect(-block.width - block.width/2, -block.height, block.width, block.height);
+      ctx.fillRect(-block.width - block.width/2 + block.width, -block.height, block.width, block.height);
+      ctx.fillRect(-block.width - block.width/2 + block.width, -block.height - block.height, block.width, block.height);
+      ctx.fillRect(-block.width - block.width/2 + block.width*2, -block.height, block.width, block.height);
       ctx.restore();
       block.y = block.y + block.fallSpeed;
-
-      // block.angle = block.angle + block.rotationSpeed;
+      
+      // 
       // ctx.save();
       // ctx.translate(block.x + block.width/2, block.y + block.height/2);
       // ctx.rotate(block.angle * Math.PI/180);
@@ -55,8 +55,8 @@
     }
  
     setInterval(() => {
-      // drawBlock();
-    }, 41);
+      block.angle = block.angle + block.rotationSpeed;
+    }, 500);
  
     drawBlock();
   </script>
