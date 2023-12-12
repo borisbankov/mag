@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+      var canvas = document.getElementById('canvasId');
+      var context = canvas.getContext("2d");
+  
+      let shapes = [];
+      let activeColor = 'black';
+      canvas.addEventListener('mousemove', (e) => {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          for(let i = 0; i < shapes.length; i++){
+            context.beginPath();
+            context.arc(shapes[i].x, shapes[i].y, shapes[i].r, 0, Math.PI*2);
+            context.closePath();
+            context.fillStyle = shapes[i].color;
+            context.fill();
+          }
+
+          context.beginPath();
+          context.arc(e.offsetX, e.offsetY, e.offsetX/4, 0, Math.PI*2);
+          context.closePath();
+          activeColor = '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0');
+          context.fillStyle = activeColor;
+          context.fill();
+      });
+
+      canvas.addEventListener('click', (e) => {
+
+          shapes.push({x: e.offsetX, y: e.offsetY, r: e.offsetX/4, color: activeColor});
+      });
+      function mouse_player1(evt){
+          var rect = canvas.getBoundingClientRect(); // взима позицията на платното в документа, в случай, че то не започва от горния ляв ъгъл
+          var mouseX = evt.clientX - rect.left; // позицията на курсора по хоризонтала
+          var mouseY = evt.clientY - rect.top; // позиията на курсора по вертикала
+          return {
+              cursor_x: mouseX,
+              cursor_y: mouseY,
+          } // фунцкията връша два параметъра, cursor_x и cursor_y
+      }
+      
+    });
+  </script>
+  <style type="text/css">
+  #canvasId{
+    background: black;
+  }
+  </style>
+</head>
+<body>
+  <canvas width="800" height="600" id="canvasId"></canvas>
+</body>
+</html>

@@ -17,53 +17,78 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext("2d");
    
-    let shape1 = {x: 20, y: 30, w: 50, h: 50, speedX: 5, speedY: 8};
-    let shape2 = {x: 420, y: 450, w: 50, h: 50, speedX: 6, speedY: 7};
+    let shape1 = {x: 20, y: 30, w: 150, h: 50, speedX: 5, speedY: 8};
+    let shape2 = [{x: 220, y: 130, w: 50, h: 80, speedX: -6, speedY: 7}];
 
     let draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if(shape1.x >= canvas.width - shape1.w || shape1.x <= 0){
+          if(shape1.w <= canvas.width/2) {shape1.speedX = -shape1.speedX;} else {
+            shape1.w = shape1.w/2
+          }
+      }
+      if(shape1.y >= canvas.height - shape1.h || shape1.y <= 0){
+          if(shape1.h <= canvas.height/2) {shape1.speedY = -shape1.speedY;} {
+            shape1.h = shape1.h/2
+          }
+      }
       shape1.x = shape1.x + shape1.speedX;
       shape1.y = shape1.y + shape1.speedY;
-        if(shape2 != null) {shape2.x = shape2.x + shape2.speedX;}
-        if(shape2 != null) {shape2.y = shape2.y + shape2.speedY;}
-        if(shape1.x >=canvas.width - shape1.w || shape1.x <= 0){
-          shape1.speedX = -shape1.speedX;
-        }
-      if(shape1.y >= canvas.height - shape1.h || shape1.y <= 0){
-                shape1.speedY = -shape1.speedY;
-      }
-      if(shape2 != null){
-        
 
-        if(shape2.x >= canvas.width - shape2.w || shape2.x <= 0){
-          shape2.speedX = -shape2.speedX;
-        }
+
+      for(let i = 0; i < shape2.length; i++){
+        if(shape2[i] != null) {shape2[i].x = shape2[i].x + shape2[i].speedX;}
+        if(shape2[i] != null) {shape2[i].y = shape2[i].y + shape2[i].speedY;}
 
         
-        if(shape2.y >= canvas.height - shape2.h || shape2.y <= 0){
-          shape2.speedY = -shape2.speedY;
+        if(shape2[i] != null){
+          if(shape2[i].x >= canvas.width - shape2[i].w || shape2[i].x <= 0){
+            shape2[i].speedX = -shape2[i].speedX;
+          }
+          if(shape2[i].y >= canvas.height - shape2[i].h || shape2[i].y <= 0){
+            shape2[i].speedY = -shape2[i].speedY;
+          }
+          if(
+              ((shape1.x >= shape2[i].x && shape1.x <= shape2[i].x + shape2[i].w) || 
+              (shape2[i].x >= shape1.x && shape2[i].x <= shape1.x + shape1.w)) &&
+              ((shape1.y >= shape2[i].y && shape1.y <= shape2[i].y + shape2[i].h) || 
+              (shape2[i].y >= shape1.y && shape2[i].y <= shape1.y + shape1.h)) || 
+
+              ((shape2[i].x >= shape1.x && shape2[i].x <= shape1.x + shape1.w) || 
+              (shape1.x >= shape2[i].x && shape1.x <= shape2[i].x + shape2[i].w)) &&
+              ((shape2[i].y >= shape1.y && shape2[i].y <= shape1.y + shape1.h) || 
+              (shape1.y >= shape2[i].y && shape1.y <= shape2[i].y + shape2[i].h))) {
+              shape1.w = shape1.w + shape2[i].w*1/2;
+              shape1.h = shape1.h + shape2[i].h*1/2;
+
+              shape2[i] = null;
+            } 
         }
-
-        if(
-          ((shape1.x >= shape2.x && shape1.x <= shape2.x + shape2.w) || 
-          (shape2.x >= shape1.x && shape2.x <= shape1.x + shape2.w)) &&
-          ((shape1.y >= shape2.y && shape1.y <= shape2.y + shape2.h) || 
-          (shape2.y >= shape1.y && shape2.y <= shape1.y + shape2.h))) {
-
-          shape1.w = shape1.w + shape2.w;
-          shape1.h = shape1.h + shape2.h;
-
-          shape2 = null;
-        } 
+        ctx.fillStyle = 'red';
+        ctx.fillRect(shape1.x, shape1.y, shape1.w, shape1.h);
+        if(shape2[i] != null){ 
+          ctx.fillStyle = 'black';
+          ctx.fillRect(shape2[i].x, shape2[i].y, shape2[i].w, shape2[i].h); 
+        }
       }
-      ctx.fillRect(shape1.x, shape1.y, shape1.w, shape1.h);
-      if(shape2 != null){ ctx.fillRect(shape2.x, shape2.y, shape2.w, shape2.h); }
-      
       requestAnimationFrame(draw);
     }
     draw();
- 
+    
+    // setInterval(draw, 41);
+    canvas.addEventListener('click', (e) => {
+      shape2.push({
+
+        x: e.offsetX, 
+        y: e.offsetY,
+        w: Math.floor(Math.random()*(151) + 50),
+        h: Math.floor(Math.random()*(151) + 50),
+        speedX: Math.floor(Math.random()*(6) + 1),
+        speedY: Math.floor(Math.random()*(7) + 2),
+      });
+      console.log(shape1.speedX, shape1.speedY);
+    });
   </script>
 </body>
 </html>

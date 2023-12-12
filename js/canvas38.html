@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+      var canvas = document.getElementById('canvasId');
+      var context = canvas.getContext("2d");
+      
+      let shapes = [];
+      let activeColor;
+      for(let i = 0; i < 10; i++){
+        let x = Math.floor(Math.random()*700);
+        let y = Math.floor(Math.random()*500);
+        let w = Math.floor(Math.random()*(100 - 50 + 1) + 50);
+        let h = Math.floor(Math.random()*(100 - 50 + 1) + 50);
+        let color = '#' + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, '0');
+        context.fillStyle = color;
+        context.fillRect(x, y, w, h);
+        shapes.push({x: x, y: y, w: w, h: h, color: color});
+
+      }
+
+      canvas.addEventListener('click', (e) => {
+        for (var i = 0; i < shapes.length; i++) {
+          context.beginPath();
+          context.rect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
+          context.closePath();
+          if(context.isPointInPath(e.offsetX, e.offsetY)){
+            activeColor = shapes[i].color;
+          }
+        }
+        for (var i = 0; i < shapes.length; i++) {
+          context.fillStyle = activeColor;
+          context.fillRect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
+        }
+
+      });
+
+
+      function mouse_player1(evt){
+          var rect = canvas.getBoundingClientRect(); // взима позицията на платното в документа, в случай, че то не започва от горния ляв ъгъл
+          var mouseX = evt.clientX - rect.left; // позицията на курсора по хоризонтала
+          var mouseY = evt.clientY - rect.top; // позиията на курсора по вертикала
+          return {
+              cursor_x: mouseX,
+              cursor_y: mouseY,
+          } // фунцкията връша два параметъра, cursor_x и cursor_y
+      }
+      
+    });
+  </script>
+  <style type="text/css">
+  #canvasId{
+    background: black;
+  }
+  </style>
+</head>
+<body>
+  <canvas width="800" height="600" id="canvasId"></canvas>
+</body>
+</html>
